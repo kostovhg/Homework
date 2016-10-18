@@ -16,11 +16,11 @@ namespace MentorGroupSpace
     {
         static void Main()
         {
+            int number = int.Parse(Console.ReadLine());
+
+            var dicStudents = ReadInputOfStudentsAttendancy(number);
+
             string inputLine = Console.ReadLine();
-
-            var dicStudents = ReadInputOfStudentsAttendancy(inputLine);
-
-            inputLine = Console.ReadLine();
 
             CollectCommentsForStudents(inputLine, dicStudents);
 
@@ -66,9 +66,11 @@ namespace MentorGroupSpace
             }
         }
 
-        private static SortedDictionary<string, Student> ReadInputOfStudentsAttendancy(string inputLine)
+        private static SortedDictionary<string, Student> ReadInputOfStudentsAttendancy(int numberOfTeams)
         {
             SortedDictionary<string, Student> dicStudents = new SortedDictionary<string, Student>();
+
+            string inputLine = Console.ReadLine();
 
             while (!inputLine.Equals("end of dates"))
             {
