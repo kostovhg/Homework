@@ -48,11 +48,13 @@ namespace ex89_TeamworkProjectsV2
         private static void PrintTeams(List<Team> teamsList)
         {
             foreach (Team t in teamsList
-                .Where(x=> x.Members != null))
+                .Where(x=> x.Members != null)
+                .OrderByDescending(x => x.Members.Count())
+                .ThenBy(t => t.Name))
             {
                 Console.WriteLine(t.Name);
                 Console.WriteLine($"- {t.Creator}");
-                foreach (var member in t.Members)
+                foreach (var member in t.Members.OrderBy(n => n))
                 {
                     Console.WriteLine($"-- {member}");
                 }
@@ -62,7 +64,7 @@ namespace ex89_TeamworkProjectsV2
             //{
                 Console.WriteLine("Teams to disband:");
                 foreach (Team t in teamsList.Where(x => x.Members == null))
-            {
+                {
                     Console.WriteLine($"{t.Name}");
                 }
 
@@ -101,7 +103,6 @@ namespace ex89_TeamworkProjectsV2
                     }
                     else
                     {
-
                         teamsList.Last(x => x.Name == inputApplyForTeam).Members.Add(inputMemberName);
                     }
 
