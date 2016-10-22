@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,24 +13,33 @@ namespace ex01_ConvertFromBase10ToBase
         {
             string[] input = Console.ReadLine().Split();
 
-            int baseN = int.Parse(input[0]);
-            double num = double.MaxValue;
+            string strBase = input[0];
+            string strNumBase10 = input[1];
 
-            double result = ConvertBase10ToN(baseN, num);
+            var result = ConvertBase10ToN(strBase, strNumBase10);
+
+            Console.WriteLine($"{result}");
             
         }
 
-        private static double ConvertBase10ToN(int baseN, double num)
+        private static string ConvertBase10ToN(string baseN, string num)
         {
-            double resultN = 0;
+            
+            StringBuilder output = new StringBuilder();
 
-            for (int i = 0; i < length; i++)
+            BigInteger rem = 0;
+            BigInteger number = BigInteger.Parse(num);
+            BigInteger bas = BigInteger.Parse(baseN);
+
+            while (number > 0)
             {
-
+                rem = number % BigInteger.Parse(baseN);
+                number /= bas;
+                output.Insert(0, rem.ToString());
             }
 
-
-            return resultN;
+            
+                return output.ToString();
         }
     }
 }
